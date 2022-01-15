@@ -43,3 +43,15 @@ export const frequencyByPresence = (words: string[]): Record<string, number> => 
         }, {} as any);
 
 }
+
+export const wordScore = (word: string, letters: string[]) =>
+    word
+        .split('')
+        .reduce((prev, curr) => prev + +(letters.includes(curr)), 0)
+
+export const wordScoreWeighted = (word: string, letters: { [key: string]: number }) =>
+    word
+        .split('')
+        .reduce((prev, curr) => prev + (letters[curr] || 0), 0)
+
+export const onlyUnique = (value: string, index: number, self: string[]) => self.indexOf(value) === index;

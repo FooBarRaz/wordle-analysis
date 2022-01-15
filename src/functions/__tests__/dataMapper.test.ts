@@ -1,4 +1,4 @@
-import {frequencyByOccurrences, frequencyByPresence, totalLetters} from "../dataMapper";
+import {frequencyByOccurrences, frequencyByPresence, totalLetters, wordScore, wordScoreWeighted} from "../dataMapper";
 
 describe('dataMapper functions', function () {
     let words: string[];
@@ -41,5 +41,24 @@ describe('dataMapper functions', function () {
             expect(result).toEqual(9);
         });
 
+    });
+
+    describe('word score', function () {
+        describe('linear', function () {
+            it('should score word based on how many required letters are present', function () {
+                const fooScore = wordScore('foo', ['o','c','r','z'])
+
+                expect(fooScore).toEqual(2);
+            });
+        });
+
+        describe('weighted', function () {
+            it('should score word based on how frequent each char is', function () {
+
+                const fooScore = wordScoreWeighted('foo', { 'f': 1, o: 4 })
+
+                expect(fooScore).toEqual(9);
+            });
+        });
     });
 });

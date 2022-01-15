@@ -36,7 +36,6 @@ export const LettersHistogram = () => {
 
     const data = formatData(words);
     return (<>
-
         <form onChange={val => {
             setStudy((val.target as any).value);
         }}>
