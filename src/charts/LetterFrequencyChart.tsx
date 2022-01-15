@@ -3,7 +3,7 @@ import {useWordList} from "../useWordList";
 import {frequencyByOccurrences, frequencyByPresence} from "../functions/dataMapper";
 import {useState} from "react";
 
-export const LettersHistogram = () => {
+export const LetterFrequencyChart = () => {
     const words = useWordList();
     const fiveLetterWords = words.filter(w => w.length === 5);
     const [sortKey, setSortKey] = useState('5lw');

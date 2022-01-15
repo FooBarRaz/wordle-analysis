@@ -1,13 +1,11 @@
 import React from 'react';
 import './App.css';
-import {LettersHistogram} from './charts/LettersHistogram';
-import {BestWords} from "./charts/BestWords";
+import {LetterFrequencyChart} from './charts/LetterFrequencyChart';
 
 function App() {
   return (
     <div className="App">
-        <LettersHistogram />
-        <BestWords />
+        <LetterFrequencyChart />
     </div>
   );
 }
