@@ -10,18 +10,6 @@ export const BestWords = () => {
     const [wordsWithWeightedScores, setWords] = useState<{ word: string, score: number }[]>([]);
     const frequenciesByOccurrence = (frequencyByOccurrences(fiveLetterWords));
 
-    // useEffect(() => {
-    //     const filteredFrequencyList = Object.keys(frequenciesByOccurrence)
-    //         .filter(letter => !blacklist.includes(letter))
-    //         .reduce((prev, curr) => {
-    //             return {
-    //                 ...prev,
-    //                 curr: frequenciesByOccurrence[curr]
-    //             }
-    //         }, {})
-    //     setFrequenciesByOccurrence(filteredFrequencyList);
-    // }, [blacklist])
-
     useEffect(() => {
         const result = fiveLetterWords.map(eachWord => {
             const filteredFrequencyList = Object.keys(frequenciesByOccurrence)
@@ -38,7 +26,7 @@ export const BestWords = () => {
 
         setWords(result);
 
-    }, [blacklist]);
+    }, [blacklist,fiveLetterWords, frequenciesByOccurrence]);
 
 
     return <>

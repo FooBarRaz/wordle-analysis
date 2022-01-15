@@ -22,7 +22,7 @@ export const LettersHistogram = () => {
             const [letter, frequency] = eachEntry;
             return {
                 name: letter,
-                ['all']: frequency
+                all: frequency
             }
         })
             .reduce((prev, curr) => {
