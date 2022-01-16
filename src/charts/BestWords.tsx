@@ -4,8 +4,6 @@ import {useEffect, useState} from "react";
 
 export const BestWords = () => {
     const fiveLetterWords = useWordList().filter(word => word.length === 5);
-    // let initialState = frequencyByOccurrences(fiveLetterWords);
-    // const [frequenciesByOccurrence, setFrequenciesByOccurrence] = useState<{ [letter: string]: number }>(initialState);
     const [blacklist, setBlacklist] = useState<string[]>([]);
     const [wordsWithWeightedScores, setWords] = useState<{ word: string, score: number }[]>([]);
     const frequenciesByOccurrence = (frequencyByOccurrences(fiveLetterWords));
