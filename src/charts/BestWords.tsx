@@ -1,20 +1,21 @@
-import {useWordList} from "../useWordList";
 import {frequencyByOccurrences, onlyUnique, wordScoreWeighted} from "../functions/dataMapper";
 import {useEffect, useState} from "react";
+import {isEqual} from 'lodash';
+import {fiveLetterWords} from "../data/words";
 
 export const BestWords = () => {
-    const fiveLetterWords = useWordList().filter(word => word.length === 5);
     const [blacklist, setBlacklist] = useState<string[]>([]);
     const [wordsWithWeightedScores, setWords] = useState<{ word: string, score: number }[]>([]);
-    const frequenciesByOccurrence = (frequencyByOccurrences(fiveLetterWords));
+    const frequenciesByOccurrence = frequencyByOccurrences(fiveLetterWords);
 
     useEffect(() => {
+        const filteredFrequencyList = Object.keys(frequenciesByOccurrence)
+            .filter(letter => !blacklist.includes(letter))
+            .reduce((prev, curr) => ({
+                ...prev, [curr]: frequenciesByOccurrence[curr]
+            }), {})
+
         const result = fiveLetterWords.map(eachWord => {
-            const filteredFrequencyList = Object.keys(frequenciesByOccurrence)
-                .filter(letter => !blacklist.includes(letter))
-                .reduce((prev, curr) => ({
-                    ...prev, [curr]: frequenciesByOccurrence[curr]
-                }), {})
             const score = wordScoreWeighted(eachWord, filteredFrequencyList);
             return {word: eachWord, score}
         })
@@ -24,8 +25,7 @@ export const BestWords = () => {
 
         setWords(result);
 
-    }, [blacklist,fiveLetterWords, frequenciesByOccurrence]);
-
+    }, [blacklist, frequenciesByOccurrence]);
 
     return <>
         <h3>Best words</h3>
@@ -34,9 +34,11 @@ export const BestWords = () => {
         <input type="text" name="blacklist" onChange={(e) => {
             const letters = e.target.value;
             let strings = letters.split(',');
-            setBlacklist(strings)
+            if (!isEqual(strings, blacklist)) {
+                setBlacklist(strings)
+            }
         }}/>
-        <ul>
+        <ul style={{listStyle: 'none'}}>
             {wordsWithWeightedScores.map(eachWord => (<li>{eachWord.word}: {eachWord.score}</li>))}
         </ul>
     </>
