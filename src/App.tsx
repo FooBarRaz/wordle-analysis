@@ -13,7 +13,7 @@ function App() {
             <br/>
             <Link to="/best-words">Best Words</Link>
             <br/>
-            <a href="https://www.powerlanguage.co.uk/wordle/">Wordle</a>
+            <a href="https://www.powerlanguage.co.uk/wordle/" target="_blank">Wordle</a>
         </nav>
 
         <Routes>
